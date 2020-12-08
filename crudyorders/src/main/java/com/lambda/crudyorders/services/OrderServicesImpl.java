@@ -2,10 +2,12 @@ package com.lambda.crudyorders.services;
 
 import com.lambda.crudyorders.models.Order;
 import com.lambda.crudyorders.repositories.OrderRepository;
+import com.lambda.crudyorders.views.AdvanceAmount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 /**
  * The type Order services.
@@ -22,6 +24,11 @@ public class OrderServicesImpl implements OrderServices
 	@Override public Order findOrderById(long id)
 	{
 		return ordrepos.findById(id).orElseThrow(() -> new EntityNotFoundException("Order " + id + " not found"));
+	}
+	
+	@Override public List<AdvanceAmount> findOrdersByAdvanceAmount()
+	{
+		return ordrepos.findAdvanceAmounts();
 	}
 	
 	@Override public Order save(Order order)

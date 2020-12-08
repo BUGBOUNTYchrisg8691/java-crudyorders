@@ -2,6 +2,7 @@ package com.lambda.crudyorders.controllers;
 
 import com.lambda.crudyorders.models.Order;
 import com.lambda.crudyorders.services.OrderServices;
+import com.lambda.crudyorders.views.AdvanceAmount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * The type Order controller.
@@ -39,4 +42,10 @@ public class OrderController
 	}
 	
 	// stretch - GET /orders/advanceamount
+	@GetMapping(value = "advanceamount", produces = {"application/json"})
+	public ResponseEntity<?> getOrdersByAdvanceAmount()
+	{
+		List<AdvanceAmount> retlst = orderServices.findOrdersByAdvanceAmount();
+		return new ResponseEntity<>(retlst, HttpStatus.OK);
+	}
 }
