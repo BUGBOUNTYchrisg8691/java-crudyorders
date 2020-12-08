@@ -7,9 +7,15 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+/**
+ * The type Agent services.
+ */
 @Service(value = "agentservices")
 public class AgentServicesImpl implements AgentServices
 {
+	/**
+	 * The Agentrepos.
+	 */
 	@Autowired
 	AgentRepository agentrepos;
 	

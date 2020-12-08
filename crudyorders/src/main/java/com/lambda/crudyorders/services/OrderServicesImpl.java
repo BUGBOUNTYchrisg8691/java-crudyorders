@@ -7,9 +7,15 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 
+/**
+ * The type Order services.
+ */
 @Service(value = "orderServices")
 public class OrderServicesImpl implements OrderServices
 {
+	/**
+	 * The Ordrepos.
+	 */
 	@Autowired
 	OrderRepository ordrepos;
 	

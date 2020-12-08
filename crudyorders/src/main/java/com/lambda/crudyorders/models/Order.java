@@ -19,13 +19,13 @@ public class Order
 	
 	@ManyToOne
 	@JoinColumn(name = "custcode", nullable = false)
-	@JsonIgnoreProperties(value = {"orders", "agent"}, allowSetters = true)
+	@JsonIgnoreProperties(value = {"orders"}, allowSetters = true)
 	private Customer customer;
 	
 	@ManyToMany
 	@JoinTable(name = "orderspayments", joinColumns = @JoinColumn(name = "ordnum"), inverseJoinColumns =
 	@JoinColumn(name = "paymentid"))
-	@JsonIgnoreProperties(value = "orders", allowSetters = true)
+	@JsonIgnoreProperties(value = {"orders"}, allowSetters = true)
 	private Set<Payment> payments = new HashSet<>();
 	
 	private double ordamount;

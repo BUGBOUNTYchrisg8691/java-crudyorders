@@ -22,11 +22,11 @@ public class Customer
 	
 	@ManyToOne
 	@JoinColumn(name = "agentcode", nullable = false)
-	@JsonIgnoreProperties(value = "customers", allowSetters = true)
+	@JsonIgnoreProperties(value = {"customers"}, allowSetters = true)
 	private Agent agent;
 	
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JsonIgnoreProperties(value = "customer", allowSetters = true)
+	@JsonIgnoreProperties(value = {"customer"}, allowSetters = true)
 	private List<Order> orders = new ArrayList<>();
 	
 	private String custcountry;
@@ -50,7 +50,6 @@ public class Customer
 	 * Instantiates a new Customer.
 	 *
 	 * @param custname       the custname
-	 * @param agent          the agent
 	 * @param custcountry    the custcountry
 	 * @param custcity       the custcity
 	 * @param workingarea    the workingarea
@@ -60,6 +59,7 @@ public class Customer
 	 * @param paymentamt     the paymentamt
 	 * @param outstandingamt the outstandingamt
 	 * @param phone          the phone
+	 * @param agent          the agent
 	 */
 	public Customer(String custname, String custcountry, String custcity, String workingarea,
 	                String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt,

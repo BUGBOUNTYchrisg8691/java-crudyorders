@@ -18,7 +18,7 @@ public class Payment
 	private long paymentid;
 	
 	@ManyToMany(mappedBy = "payments")
-	@JsonIgnoreProperties(value = "payments", allowSetters = true)
+	@JsonIgnoreProperties(value = {"payments"}, allowSetters = true)
 	private Set<Order> orders = new HashSet<>();
 	
 	@Column(nullable = false)
