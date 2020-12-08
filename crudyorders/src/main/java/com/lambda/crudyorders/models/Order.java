@@ -19,7 +19,7 @@ public class Order
 	
 	@ManyToOne
 	@JoinColumn(name = "custcode", nullable = false)
-	@JsonIgnoreProperties(value = {"orders"}, allowSetters = true)
+	@JsonIgnoreProperties(value = {"agent", "orders"}, allowSetters = true)
 	private Customer customer;
 	
 	@ManyToMany
