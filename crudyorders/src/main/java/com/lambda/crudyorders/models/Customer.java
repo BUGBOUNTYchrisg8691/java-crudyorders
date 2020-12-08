@@ -61,9 +61,9 @@ public class Customer
 	 * @param outstandingamt the outstandingamt
 	 * @param phone          the phone
 	 */
-	public Customer(String custname, Agent agent, String custcountry, String custcity, String workingarea,
+	public Customer(String custname, String custcountry, String custcity, String workingarea,
 	                String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt,
-	                String phone)
+	                String phone, Agent agent)
 	{
 		this.custname = custname;
 		this.agent = agent;

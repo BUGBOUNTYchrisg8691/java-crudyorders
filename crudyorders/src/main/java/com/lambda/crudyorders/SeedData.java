@@ -1,14 +1,14 @@
-package com.lambdaschool.getorders;
+package com.lambda.crudyorders;
 
 import com.github.javafaker.Faker;
-import com.lambdaschool.getorders.models.Agent;
-import com.lambdaschool.getorders.models.Customer;
-import com.lambdaschool.getorders.models.Order;
-import com.lambdaschool.getorders.models.Payment;
-import com.lambdaschool.getorders.repositories.AgentRepository;
-import com.lambdaschool.getorders.repositories.CustomerRepository;
-import com.lambdaschool.getorders.repositories.OrderRepository;
-import com.lambdaschool.getorders.repositories.PaymentRepository;
+import com.lambda.crudyorders.models.Agent;
+import com.lambda.crudyorders.models.Customer;
+import com.lambda.crudyorders.models.Order;
+import com.lambda.crudyorders.models.Payment;
+import com.lambda.crudyorders.repositories.AgentRepository;
+import com.lambda.crudyorders.repositories.CustomerRepository;
+import com.lambda.crudyorders.repositories.OrderRepository;
+import com.lambda.crudyorders.repositories.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -547,8 +547,7 @@ public class SeedData implements CommandLineRunner
 
 		for (String theName : customerNames)
 		{
-			String custcity = dataFaker.address()
-					.city();
+			String custcity = dataFaker.gameOfThrones().city();
 			String tempWorkingarea = dataFaker.harryPotter().house();
 			String tempCustcountry = dataFaker.harryPotter().location();
 			String tempGrade = dataFaker.country()

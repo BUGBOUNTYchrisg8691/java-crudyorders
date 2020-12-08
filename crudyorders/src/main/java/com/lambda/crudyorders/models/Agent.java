@@ -1,6 +1,9 @@
 package com.lambda.crudyorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,8 +23,9 @@ public class Agent
 	private String phone;
 	private String country;
 	
-	@OneToOne(mappedBy = "customers")
-	private List<Customer> customer;
+	@OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+	@JsonIgnoreProperties(value = "agent", allowSetters = true)
+	private List<Customer> customers = new ArrayList<>();
 	
 	/**
 	 * Instantiates a new Agent.
@@ -173,18 +177,18 @@ public class Agent
 	 *
 	 * @return the customer
 	 */
-	public List<Customer> getCustomer()
+	public List<Customer> getCustomers()
 	{
-		return customer;
+		return customers;
 	}
 	
 	/**
-	 * Sets customer.
+	 * Sets customers.
 	 *
-	 * @param customer the customer
+	 * @param customers the customers
 	 */
-	public void setCustomer(List<Customer> customer)
+	public void setCustomers(List<Customer> customers)
 	{
-		this.customer = customer;
+		this.customers = customers;
 	}
 }

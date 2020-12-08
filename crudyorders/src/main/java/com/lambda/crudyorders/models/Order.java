@@ -9,6 +9,8 @@ import java.util.Set;
 /**
  * The type Order.
  */
+@Entity
+@Table(name = "orders")
 public class Order
 {
 	@Id
@@ -16,7 +18,7 @@ public class Order
 	private long ordnum;
 	
 	@ManyToOne
-	@JoinColumn(name = "paymentid", nullable = false)
+	@JoinColumn(name = "custcode", nullable = false)
 	@JsonIgnoreProperties(value = "orders", allowSetters = true)
 	private Customer customer;
 	
@@ -40,12 +42,12 @@ public class Order
 	/**
 	 * Instantiates a new Order.
 	 *
-	 * @param customer         the customer
 	 * @param ordamount        the ordamount
 	 * @param advanceamt       the advanceamt
 	 * @param orderdescription the orderdescription
+	 * @param customer         the customer
 	 */
-	public Order(Customer customer, double ordamount, double advanceamt, String orderdescription)
+	public Order(double ordamount, double advanceamt, String orderdescription, Customer customer)
 	{
 		this.customer = customer;
 		this.ordamount = ordamount;
