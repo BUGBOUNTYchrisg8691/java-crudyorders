@@ -54,7 +54,6 @@ public class CustomerServicesImpl implements CustomerServices
 	
 	@Override public List<OrderCounts> findAllCustomersOrderCounts()
 	{
-		List<OrderCounts> retlst = custrepos.findOrderCounts();
-		return retlst;
+		return custrepos.findOrderCounts();
 	}
 }

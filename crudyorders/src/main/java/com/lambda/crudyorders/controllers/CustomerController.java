@@ -80,7 +80,7 @@ public class CustomerController
 	 *
 	 * @return the customers order count
 	 */
-	@GetMapping(value = "/customer/orders/count", produces = {"application/json"})
+	@GetMapping(value = "/orders/count", produces = {"application/json"})
 	public ResponseEntity<?> getCustomersOrderCount()
 	{
 		List<OrderCounts> retlst = customerServices.findAllCustomersOrderCounts();
