@@ -19,6 +19,27 @@ public interface OrderServices
 	Order save(Order order);
 	
 	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 */
+	void delete(long id);
+	
+	/**
+	 * Delete all orders.
+	 */
+	void deleteAllOrders();
+	
+	/**
+	 * Update order.
+	 *
+	 * @param order the order
+	 * @param id    the id
+	 * @return the order
+	 */
+	Order update(Order order, long id);
+	
+	/**
 	 * Find order by id order.
 	 *
 	 * @param id the id
@@ -26,5 +47,10 @@ public interface OrderServices
 	 */
 	Order findOrderById(long id);
 	
+	/**
+	 * Find orders by advance amount list.
+	 *
+	 * @return the list
+	 */
 	List<AdvanceAmount> findOrdersByAdvanceAmount();
 }

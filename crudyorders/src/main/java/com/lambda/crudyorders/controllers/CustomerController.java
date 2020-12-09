@@ -5,13 +5,14 @@ import com.lambda.crudyorders.models.Order;
 import com.lambda.crudyorders.services.CustomerServices;
 import com.lambda.crudyorders.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,4 +87,31 @@ public class CustomerController
 		List<OrderCounts> retlst = customerServices.findAllCustomersOrderCounts();
 		return new ResponseEntity<>(retlst, HttpStatus.OK);
 	}
+	
+	@PostMapping(value = "/customer", consumes = {"application/json"})
+	public ResponseEntity<?> addNewCustomer(@Valid @RequestBody Customer newCustomer)
+	{
+		newCustomer.setCustcode(0);
+		newCustomer = customerServices.save(newCustomer);
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		
+		URI newCustomerURI =
+				ServletUriComponentsBuilder.fromCurrentRequest().path("/{custcode}")
+						.buildAndExpand(newCustomer.getCustcode()).toUri();
+		
+		responseHeaders.setLocation(newCustomerURI);
+		
+		return new ResponseEntity <>(null, responseHeaders, HttpStatus.CREATED);
+	}
+	
+	@PutMapping(value = "/customer/{id}", consumes = {"application/json"})
+	public ResponseEntity<?> updateFullCustomer(@Valid @RequestBody Customer updateCustomer, @PathVariable long id)
+	{
+		updateCustomer.setCustcode(id);
+		customerServices.save(updateCustomer);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
 }

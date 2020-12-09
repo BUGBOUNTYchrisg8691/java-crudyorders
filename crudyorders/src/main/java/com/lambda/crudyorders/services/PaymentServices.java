@@ -14,4 +14,9 @@ public interface PaymentServices
 	 * @return the payment
 	 */
 	Payment save(Payment payment);
+	
+	/**
+	 * Delete all payments.
+	 */
+	void deleteAllPayments();
 }

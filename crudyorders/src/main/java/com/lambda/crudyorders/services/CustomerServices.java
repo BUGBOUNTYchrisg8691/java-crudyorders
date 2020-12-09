@@ -20,6 +20,27 @@ public interface CustomerServices
 	Customer save(Customer customer);
 	
 	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 */
+	void delete(long id);
+	
+	/**
+	 * Update customer.
+	 *
+	 * @param customer the customer
+	 * @param id       the id
+	 * @return the customer
+	 */
+	Customer update(Customer customer, long id);
+	
+	/**
+	 * Delete all customers.
+	 */
+	void deleteAllCustomers();
+	
+	/**
 	 * Find all customers list.
 	 *
 	 * @return the list
