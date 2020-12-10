@@ -48,4 +48,8 @@ public interface CustomerServices
 	 * @return the customer
 	 */
 	Customer save(Customer customer);
+	
+	void delete(long custcode);
+	
+	Customer update(Customer customerPatch, long custcode);
 }

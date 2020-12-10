@@ -4,13 +4,14 @@ import com.lambdaschool.crudyorders.models.Customer;
 import com.lambdaschool.crudyorders.services.CustomerServices;
 import com.lambdaschool.crudyorders.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -77,5 +78,44 @@ public class CustomerController
 	{
 		List<OrderCounts> retLst = customerServices.findCustomerOrderCounts();
 		return new ResponseEntity<>(retLst, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(value = "/customer/{custcode}")
+	public ResponseEntity<?> deleteCustomer(@PathVariable long custcode)
+	{
+		customerServices.delete(custcode);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PatchMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+	public ResponseEntity<?> updateCustomer(@PathVariable long custcode, @RequestBody Customer customerPatch)
+	{
+		customerServices.update(customerPatch, custcode);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PutMapping(value = "/customer/{custcode}", consumes = {"application/json"})
+	public ResponseEntity<?> replaceCustomer(@PathVariable long custcode, @Valid @RequestBody Customer customer)
+	{
+		customer.setCustcode(custcode);
+		customer = customerServices.save(customer);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/customer", consumes = {"application/json"})
+	public ResponseEntity<?> addCustomer(@Valid @RequestBody Customer customer)
+	{
+		customer.setCustcode(0);
+		customer = customerServices.save(customer);
+		
+		HttpHeaders respHeaders = new HttpHeaders();
+		URI customerURI =
+				ServletUriComponentsBuilder.fromCurrentRequest()
+						.path("/{custcode}")
+						.buildAndExpand(customer.getCustcode())
+						.toUri();
+		respHeaders.setLocation(customerURI);
+		
+		return new ResponseEntity<>(null, respHeaders, HttpStatus.CREATED);
 	}
 }

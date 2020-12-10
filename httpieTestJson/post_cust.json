@@ -1,0 +1,27 @@
+{
+    "custname": "John",
+    "custcity": "Port Angeles",
+    "workingarea": "Washington",
+    "custcountry": "USA",
+    "grade": "1",
+    "openingamt": 70000,
+    "receiveamt": 7000,
+    "paymentamt": 777,
+    "outstandingamt": 0,
+    "phone": "5555555555",
+    "agent": {
+        "agentcode": 8
+    },
+    "orders": [
+        {
+            "ordamount": 7777,
+            "advanceamount": 777,
+            "orderdescription": "SOD",
+            "payments": [
+                {
+                    "paymentid": 4
+                }
+            ]
+        }
+    ]
+}

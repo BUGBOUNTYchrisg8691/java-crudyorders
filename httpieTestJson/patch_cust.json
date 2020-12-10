@@ -1,0 +1,21 @@
+{
+    "custname": "Micheal The Great",
+    "custcity": "Austin",
+    "workingarea": "TEXAS",
+    "custcountry": "TX",
+    "agent": {
+        "agentcode": 11
+    },
+    "orders": [
+        {
+            "ordamount": 7777,
+            "advanceamount": 777,
+            "orderdescription": "IT WORKD",
+            "payments": [
+                {
+                    "paymentid": 3
+                }
+            ]
+        }
+    ]
+}

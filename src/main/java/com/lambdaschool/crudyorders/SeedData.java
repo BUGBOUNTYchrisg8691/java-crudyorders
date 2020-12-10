@@ -10,8 +10,6 @@ import com.lambdaschool.crudyorders.repositories.CustomerRepository;
 import com.lambdaschool.crudyorders.repositories.OrderRepository;
 import com.lambdaschool.crudyorders.repositories.PaymentRepository;
 import com.lambdaschool.crudyorders.services.AgentServices;
-import com.lambdaschool.crudyorders.services.CustomerServices;
-import com.lambdaschool.crudyorders.services.OrderServices;
 import com.lambdaschool.crudyorders.services.PaymentServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -34,25 +32,30 @@ public class SeedData implements CommandLineRunner
 	 * Connects the customer table to this SeedData method
 	 */
 	@Autowired
-	private CustomerServices customerServices;
+	private CustomerRepository custrepos;
 
 	/**
 	 * Connects the agents table to this SeedData method
 	 */
 	@Autowired
-	private AgentServices agentServices;
+	private AgentRepository agentrepos;
 
 	/**
 	 * Connects the orders table to this SeedData method
 	 */
 	@Autowired
-	private OrderServices orderServices;
+	private OrderRepository ordrepos;
 
 	/**
 	 * Connects the payment table to this SeedData method
 	 */
 	@Autowired
+	private PaymentRepository payrepos;
+	
+	@Autowired
 	private PaymentServices paymentServices;
+	@Autowired
+	private AgentServices agentServices;
 
 	/**
 	 * A Random generator is needed to randomly generate faker data.
@@ -70,15 +73,18 @@ public class SeedData implements CommandLineRunner
 	@Override
 	public void run(String[] args)
 	{
+		agentServices.deleteAllAgents();
+		paymentServices.deleteAllPayments();
+		
 		Payment pay1 = new Payment("Cash");
 		Payment pay2 = new Payment("Gift Card");
 		Payment pay3 = new Payment("Credit Card");
 		Payment pay4 = new Payment("Mobile Pay");
 
-		pay1 = paymentServices.save(pay1);
-		pay2 = paymentServices.save(pay2);
-		pay3 = paymentServices.save(pay3);
-		pay4 = paymentServices.save(pay4);
+		pay1 = payrepos.save(pay1);
+		pay2 = payrepos.save(pay2);
+		pay3 = payrepos.save(pay3);
+		pay4 = payrepos.save(pay4);
 
 		Agent a01 = new Agent("Ramasundar",
 				"Bangalore",
@@ -487,57 +493,57 @@ public class SeedData implements CommandLineRunner
 		Order o12 = new Order(2500.00, 0.00, "SOD", c25);
 		o12.getPayments().add(pay1);
 
-		agentServices.save(a01);
-		agentServices.save(a02);
-		agentServices.save(a03);
-		agentServices.save(a04);
-		agentServices.save(a05);
-		agentServices.save(a06);
-		agentServices.save(a07);
-		agentServices.save(a08);
-		agentServices.save(a09);
-		agentServices.save(a10);
-		agentServices.save(a11);
-		agentServices.save(a12);
+		agentrepos.save(a01);
+		agentrepos.save(a02);
+		agentrepos.save(a03);
+		agentrepos.save(a04);
+		agentrepos.save(a05);
+		agentrepos.save(a06);
+		agentrepos.save(a07);
+		agentrepos.save(a08);
+		agentrepos.save(a09);
+		agentrepos.save(a10);
+		agentrepos.save(a11);
+		agentrepos.save(a12);
 
-		customerServices.save(c01);
-		customerServices.save(c02);
-		customerServices.save(c03);
-		customerServices.save(c04);
-		customerServices.save(c05);
-		customerServices.save(c06);
-		customerServices.save(c07);
-		customerServices.save(c08);
-		customerServices.save(c09);
-		customerServices.save(c10);
-		customerServices.save(c11);
-		customerServices.save(c12);
-		customerServices.save(c13);
-		customerServices.save(c14);
-		customerServices.save(c15);
-		customerServices.save(c16);
-		customerServices.save(c17);
-		customerServices.save(c18);
-		customerServices.save(c19);
-		customerServices.save(c20);
-		customerServices.save(c21);
-		customerServices.save(c22);
-		customerServices.save(c23);
-		customerServices.save(c24);
-		customerServices.save(c25);
+		custrepos.save(c01);
+		custrepos.save(c02);
+		custrepos.save(c03);
+		custrepos.save(c04);
+		custrepos.save(c05);
+		custrepos.save(c06);
+		custrepos.save(c07);
+		custrepos.save(c08);
+		custrepos.save(c09);
+		custrepos.save(c10);
+		custrepos.save(c11);
+		custrepos.save(c12);
+		custrepos.save(c13);
+		custrepos.save(c14);
+		custrepos.save(c15);
+		custrepos.save(c16);
+		custrepos.save(c17);
+		custrepos.save(c18);
+		custrepos.save(c19);
+		custrepos.save(c20);
+		custrepos.save(c21);
+		custrepos.save(c22);
+		custrepos.save(c23);
+		custrepos.save(c24);
+		custrepos.save(c25);
 
-		orderServices.save(o01);
-		orderServices.save(o02);
-		orderServices.save(o03);
-		orderServices.save(o04);
-		orderServices.save(o05);
-		orderServices.save(o06);
-		orderServices.save(o07);
-		orderServices.save(o08);
-		orderServices.save(o09);
-		orderServices.save(o10);
-		orderServices.save(o11);
-		orderServices.save(o12);
+		ordrepos.save(o01);
+		ordrepos.save(o02);
+		ordrepos.save(o03);
+		ordrepos.save(o04);
+		ordrepos.save(o05);
+		ordrepos.save(o06);
+		ordrepos.save(o07);
+		ordrepos.save(o08);
+		ordrepos.save(o09);
+		ordrepos.save(o10);
+		ordrepos.save(o11);
+		ordrepos.save(o12);
 
 		//Begins the faker data
 
@@ -612,7 +618,7 @@ public class SeedData implements CommandLineRunner
 			}
 
 			// this actually saves the faker data.
-			customerServices.save(fakeCustomer);
+			custrepos.save(fakeCustomer);
 		}
 	}
 }

@@ -1,0 +1,37 @@
+{
+    "custname": "Mojo",
+    "custcity": "Seattle",
+    "workingarea": "Washington",
+    "custcountry": "USA",
+    "grade": "1",
+    "openingamt": 70000,
+    "receiveamt": 7000,
+    "paymentamt": 777,
+    "outstandingamt": 0,
+    "phone": "123456789",
+    "agent": {
+        "agentcode": 8
+    },
+    "orders": [
+        {
+            "ordamount": 7777,
+            "advanceamount": 777,
+            "orderdescription": "SOD",
+            "payments": [
+                {
+                    "paymentid": 4
+                }
+            ]
+        },
+        {
+            "ordamount": 1234,
+            "advanceamount": 52,
+            "orderdescription": "ANOTHER ORDER",
+            "payments": [
+                {
+                    "paymentid": 4
+                }
+            ]
+        }
+    ]
+}

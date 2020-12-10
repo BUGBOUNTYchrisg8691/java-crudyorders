@@ -22,4 +22,6 @@ public interface AgentServices
 	 * @return the agent
 	 */
 	Agent save(Agent agent);
+	
+	void deleteAllAgents();
 }

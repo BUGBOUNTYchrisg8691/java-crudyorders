@@ -25,4 +25,9 @@ public class PaymentServicesImpl implements PaymentServices
 	{
 		return payrepos.save(payment);
 	}
+	
+	@Override public void deleteAllPayments()
+	{
+		payrepos.deleteAll();
+	}
 }
