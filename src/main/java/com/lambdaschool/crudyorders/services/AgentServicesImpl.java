@@ -33,6 +33,22 @@ public class AgentServicesImpl implements AgentServices
 		agentrepos.deleteAll();
 	}
 	
+	@Override public void deleteAgent(long agentcode) throws AgentHasCustomersException
+	{
+		Agent agent = agentrepos.findById(agentcode)
+				.orElseThrow(() -> new EntityNotFoundException("Agent " + agentcode + " not found"));
+		
+		if (agent.getCustomers().size() == 0)
+		{
+			agentrepos.deleteById(agent.getAgentcode());
+		}
+		else
+		{
+			throw new AgentHasCustomersException("Unable to delete. Agent " + agent.getAgentcode() + " still has " +
+					"customers.");
+		}
+	}
+	
 	@Override
 	public Agent findAgentById(long agentid)
 	{
