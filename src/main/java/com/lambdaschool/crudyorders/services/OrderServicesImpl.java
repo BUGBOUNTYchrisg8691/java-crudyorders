@@ -1,7 +1,9 @@
 package com.lambdaschool.crudyorders.services;
 
 import com.lambdaschool.crudyorders.models.Order;
+import com.lambdaschool.crudyorders.models.Payment;
 import com.lambdaschool.crudyorders.repositories.OrderRepository;
+import com.lambdaschool.crudyorders.repositories.PaymentRepository;
 import com.lambdaschool.crudyorders.views.AdvanceAmounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +25,42 @@ public class OrderServicesImpl implements OrderServices
 	@Autowired
 	OrderRepository ordrepos;
 	
+	@Autowired
+	PaymentRepository payrepos;
+	
 	@Transactional
 	@Override
 	public Order save(Order order)
 	{
-		return ordrepos.save(order);
+		Order newOrder = new Order();
+		
+		if (order.getOrdnum() != 0)
+		{
+			ordrepos.findById(order.getOrdnum())
+					.orElseThrow(() -> new EntityNotFoundException("Order " + order.getOrdnum() + " not found"));
+			newOrder.setOrdnum(order.getOrdnum());
+		}
+		
+		newOrder.setOrdamount(order.getOrdamount());
+		newOrder.setAdvanceamount(order.getAdvanceamount());
+		newOrder.setOrderdescription(order.getOrderdescription());
+		newOrder.setCustomer(order.getCustomer());
+		
+		newOrder.getPayments().clear();
+		for (Payment payment : order.getPayments())
+		{
+			Payment newPayment = payrepos.findById(payment.getPaymentid())
+					.orElseThrow(() -> new EntityNotFoundException("Payment " + payment.getPaymentid() + " not found"));
+			newOrder.getPayments().add(newPayment);
+		}
+		
+		return ordrepos.save(newOrder);
+	}
+	
+	@Transactional
+	@Override public void delete(long ordnum)
+	{
+		ordrepos.deleteById(ordnum);
 	}
 	
 	@Override

@@ -32,4 +32,6 @@ public interface OrderServices
 	 * @return the order
 	 */
 	Order save(Order order);
+	
+	void delete(long ordnum);
 }

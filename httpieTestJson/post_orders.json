@@ -1,0 +1,13 @@
+{
+    "ordamount": 3.21,
+    "advanceamount": 1.23,
+    "orderdescription": "My New Order",
+    "customer": {
+        "custcode": 30
+    },
+    "payments": [
+        {
+            "paymentid": 4
+        }
+    ]
+}
